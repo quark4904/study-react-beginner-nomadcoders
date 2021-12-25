@@ -1,0 +1,19 @@
+<!-- Vanilla Js로 코딩하는 방법 -->
+<!DOCTYPE html>
+<html>
+  <body>
+    <span id="click">Total Clicks: 0</span>
+    <button id="btn">Click me!</button>
+  </body>
+  <script>
+    let counter = 0;
+    const span = document.getElementById("click");
+    const button = document.getElementById("btn");
+    function handleClick() {
+      console.log("I've been clicked.");
+      counter += 1;
+      span.innerText = `Total Clicks: ${counter}`;
+    }
+    button.addEventListener("click", handleClick);
+  </script>
+</html>
