@@ -7,8 +7,8 @@
   <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function Btn({ banana, test }) {
-      console.log(banana, test);
+    function Btn({ text, changeValue }) {
+      console.log(text, "was chaneged");
       return (
         <button
           style={{
@@ -17,19 +17,23 @@
             padding: "10px 20px",
             border: 0,
             borderRadius: 10,
-            fontSize: test ? 15 : 20,
           }}
+          onClick={changeValue}
         >
-          {banana}
+          {text}
         </button>
       );
     }
-
+    const MemorizedBtn = React.memo(Btn);
     function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = (event) => {
+        setValue("Revert Changes");
+      };
       return (
         <div>
-          <Btn banana="Save Changes" test={false} />
-          <Btn banana="Continue" test={true} />
+          <MemorizedBtn text={value} changeValue={changeValue} />
+          <MemorizedBtn text="Continue" />
         </div>
       );
     }
