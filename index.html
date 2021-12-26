@@ -59,14 +59,56 @@
       );
     }
     function KgToPounds() {
+      const [num, setNum] = React.useState(0);
+      const [inverted, setInverted] = React.useState(false);
+
+      const onChange = (event) => {
+        setNum(event.target.value);
+      };
+
+      const reset = () => {
+        setNum(0);
+      };
+
+      const invert = () => {
+        setInverted((current) => !current);
+        reset();
+      };
+
       return (
         <div>
           <h2>Kg to Pounds</h2>
+          <div>
+            <label>kg</label>
+            <input
+              id="kg"
+              placeholder="kg"
+              value={inverted ? num / 2.20462 : num}
+              onChange={onChange}
+              disabled={inverted}
+            ></input>
+          </div>
+          <div>
+            <label>Pounds</label>
+            <input
+              id="pounds"
+              placeholder="pounds"
+              value={inverted ? num : num * 2.20462}
+              onChange={onChange}
+              disabled={!inverted}
+            ></input>
+          </div>
+          <div>
+            <button onClick={reset}>Reset</button>
+            <button onClick={invert}>
+              {inverted ? "Turn back" : "Invert"}
+            </button>
+          </div>
         </div>
       );
     }
     function App() {
-      const [index, setIndex] = React.useState("00");
+      const [index, setIndex] = React.useState("1");
 
       const onSelect = (event) => {
         setIndex(event.target.value);
